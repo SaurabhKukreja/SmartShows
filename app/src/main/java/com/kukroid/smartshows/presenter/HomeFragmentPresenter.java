@@ -40,11 +40,25 @@ public class HomeFragmentPresenter implements HomeFragmentContract.NetworkInterf
     }
 
     public void loadMostPopularMovies() {
-        new NetworkCaller(this).getMostPopularMoview(1);
+
+        if(view.checkInternetConnectivity()) {
+            view.showProgressBar();
+            new NetworkCaller(this).getMostPopularMoview(1);
+
+        }else {
+            view.onOffline();
+        }
     }
 
     public void loadTopRatedMovies() {
 
-        new NetworkCaller(this).getTopRatedMovies(1);
+        if(view.checkInternetConnectivity()) {
+            view.showProgressBar();
+            new NetworkCaller(this).getTopRatedMovies(1);
+
+        }else {
+            view.onOffline();
+        }
+
     }
 }
