@@ -7,8 +7,7 @@ import java.util.List;
 
 public interface HomeFragmentContract {
 
-    void filterTopRatedMovies();
-    void filterMostPopularMovies();
+
     boolean checkInternetConnectivity();
     void setDataToRecyclerView(List<Result> body);
     void showProgressBar();

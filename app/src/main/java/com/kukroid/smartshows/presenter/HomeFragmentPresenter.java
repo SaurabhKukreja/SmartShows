@@ -9,16 +9,18 @@ import java.util.List;
 public class HomeFragmentPresenter implements HomeFragmentContract.NetworkInterface {
 
     private HomeFragmentContract view;
+    private NetworkCaller networkCaller;
 
     public HomeFragmentPresenter(HomeFragmentContract view) {
         this.view = view;
+        this.networkCaller = new NetworkCaller(this);
     }
 
     public void loadNowPlayingMovieList(int page) {
 
         if(view.checkInternetConnectivity()) {
             view.showProgressBar();
-            new NetworkCaller(this).getNowPlayingMovies(page);
+           networkCaller.getNowPlayingMovies(page);
         }else {
             view.onOffline();
         }
@@ -43,7 +45,7 @@ public class HomeFragmentPresenter implements HomeFragmentContract.NetworkInterf
 
         if(view.checkInternetConnectivity()) {
             view.showProgressBar();
-            new NetworkCaller(this).getMostPopularMoview(1);
+           networkCaller.getMostPopularMoview(1);
 
         }else {
             view.onOffline();
@@ -54,7 +56,7 @@ public class HomeFragmentPresenter implements HomeFragmentContract.NetworkInterf
 
         if(view.checkInternetConnectivity()) {
             view.showProgressBar();
-            new NetworkCaller(this).getTopRatedMovies(1);
+            networkCaller.getTopRatedMovies(1);
 
         }else {
             view.onOffline();
