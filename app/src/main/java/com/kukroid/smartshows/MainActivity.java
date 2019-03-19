@@ -1,6 +1,7 @@
 package com.kukroid.smartshows;
 
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -21,8 +22,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         container = findViewById(R.id.container);
-
-        openHomeFragment();
+        if(savedInstanceState ==null) {
+            openHomeFragment();
+        }
     }
 
     private void openHomeFragment() {
