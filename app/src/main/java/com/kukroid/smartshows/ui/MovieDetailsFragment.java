@@ -1,14 +1,12 @@
 package com.kukroid.smartshows.ui;
 
-import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -34,11 +32,12 @@ public class MovieDetailsFragment extends Fragment {
         view = inflater.inflate(R.layout.movie_details,container,false);
         android.support.v7.widget.Toolbar toolbar = view.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-
+        setHasOptionsMenu(true);
         Bundle bundle = getArguments();
         if(bundle.get("Movie") != null){
             movieData = (Result) bundle.get("Movie");
         }
+        getActivity().invalidateOptionsMenu();
         return view;
     }
 
@@ -73,5 +72,12 @@ public class MovieDetailsFragment extends Fragment {
         movieReleaseDate.setText(movieData.getReleaseDate());
         movieDescription.setText(movieData.getOverview());
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+    }
+
 
 }
