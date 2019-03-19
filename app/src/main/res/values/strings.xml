@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">SmartShows</string>
+    <string name="offline">You are Offline !!!</string>
+    <string name="failure_message">Something went wrong, Plsease try again later !!!</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="popular">Popular</string>
+    <string name="now_playing">Now Playing</string>
 </resources>
