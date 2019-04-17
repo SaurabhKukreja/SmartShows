@@ -1,5 +1,7 @@
 package com.kukroid.smartshows.ui;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,7 +23,7 @@ import android.widget.RelativeLayout;
 
 import com.kukroid.smartshows.R;
 import com.kukroid.smartshows.Util.Utils;
-import com.kukroid.smartshows._Model.Result;
+import com.kukroid.smartshows._Model.Movies;
 import com.kukroid.smartshows.adapter.MovieListAdapter;
 import com.kukroid.smartshows.contract.HomeFragmentContract;
 import com.kukroid.smartshows.interfaces.MovieClick;
@@ -37,7 +39,7 @@ public class HomeFragment extends Fragment implements HomeFragmentContract, Movi
     RecyclerView recyclerView;
     MovieListAdapter movieListAdapter;
     private HomeFragmentPresenter presenter;
-    private List<Result> movieDataList;
+    private List<Movies> movieDataList;
     android.support.v7.widget.Toolbar toolbar;
     private GridLayoutManager mGridLayoutManager;
     RelativeLayout relativeLayout;
@@ -86,7 +88,7 @@ public class HomeFragment extends Fragment implements HomeFragmentContract, Movi
     }
 
     @Override
-    public void setDataToRecyclerView(List<Result> body) {
+    public void setDataToRecyclerView(List<Movies> body) {
         movieDataList.clear();
         movieDataList.addAll(body);
         movieListAdapter.notifyDataSetChanged();
@@ -107,6 +109,8 @@ public class HomeFragment extends Fragment implements HomeFragmentContract, Movi
     @Override
     public void onOffline() {
 
+        toolbar.setSubtitle(getString(R.string.favorites));
+        presenter.loadFavoriteMovies();
         showSnackBar(R.string.offline);
     }
 
@@ -115,6 +119,16 @@ public class HomeFragment extends Fragment implements HomeFragmentContract, Movi
 
         showSnackBar(R.string.failure_message);
         Utils.log(localizedMessage);
+    }
+
+    @Override
+    public void setDataFromDatabase(LiveData<List<Movies>> favoriteMovieList) {
+        favoriteMovieList.observe(this, new Observer<List<Movies>>() {
+            @Override
+            public void onChanged(@Nullable List<Movies> movies) {
+                setDataToRecyclerView(movies);
+            }
+        });
     }
 
     @Override
@@ -128,12 +142,16 @@ public class HomeFragment extends Fragment implements HomeFragmentContract, Movi
         int id = item.getItemId();
         if (id == R.id.action_topRated) {
             presenter.loadTopRatedMovies();
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(getString(R.string.top_rated));
+            toolbar.setSubtitle(getString(R.string.top_rated));
+            //((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(getString(R.string.top_rated));
             Utils.log("Top Rated ");
         }else if(id==R.id.action_mostPopular){
             presenter.loadMostPopularMovies();
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(getString(R.string.popular));
+            toolbar.setSubtitle(getString(R.string.popular));
             Utils.log("Most Popular");
+        }else if(id== R.id.action_favorites){
+            presenter.loadFavoriteMovies();
+            toolbar.setSubtitle(getString(R.string.favorites));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -165,7 +183,7 @@ public class HomeFragment extends Fragment implements HomeFragmentContract, Movi
     }
     private void showSnackBar(int message){
         Snackbar snackbar = Snackbar
-                .make(relativeLayout, message, Snackbar.LENGTH_LONG);
+                .make(getActivity().findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG);
         snackbar.show();
     }
 }

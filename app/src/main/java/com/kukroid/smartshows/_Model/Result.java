@@ -1,166 +1,98 @@
 
 package com.kukroid.smartshows._Model;
 
-import java.io.Serializable;
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Result implements Serializable {
+public class Result {
 
-    @SerializedName("poster_path")
-    @Expose
-    private String posterPath;
-    @SerializedName("adult")
-    @Expose
-    private Boolean adult;
-    @SerializedName("overview")
-    @Expose
-    private String overview;
-    @SerializedName("release_date")
-    @Expose
-    private String releaseDate;
-    @SerializedName("genre_ids")
-    @Expose
-    private List<Integer> genreIds = null;
     @SerializedName("id")
     @Expose
-    private Integer id;
-    @SerializedName("original_title")
+    private String id;
+    @SerializedName("iso_639_1")
     @Expose
-    private String originalTitle;
-    @SerializedName("original_language")
+    private String iso6391;
+    @SerializedName("iso_3166_1")
     @Expose
-    private String originalLanguage;
-    @SerializedName("title")
+    private String iso31661;
+    @SerializedName("key")
     @Expose
-    private String title;
-    @SerializedName("backdrop_path")
+    private String key;
+    @SerializedName("name")
     @Expose
-    private String backdropPath;
-    @SerializedName("popularity")
+    private String name;
+    @SerializedName("site")
     @Expose
-    private Double popularity;
-    @SerializedName("vote_count")
+    private String site;
+    @SerializedName("size")
     @Expose
-    private Integer voteCount;
-    @SerializedName("video")
+    private Integer size;
+    @SerializedName("type")
     @Expose
-    private Boolean video;
-    @SerializedName("vote_average")
-    @Expose
-    private Double voteAverage;
+    private String type;
 
-    public String getPosterPath() {
-        return posterPath;
-    }
-
-    public void setPosterPath(String posterPath) {
-        this.posterPath = posterPath;
-    }
-
-    public Boolean getAdult() {
-        return adult;
-    }
-
-    public void setAdult(Boolean adult) {
-        this.adult = adult;
-    }
-
-    public String getOverview() {
-        return overview;
-    }
-
-    public void setOverview(String overview) {
-        this.overview = overview;
-    }
-
-    public String getReleaseDate() {
-        return releaseDate;
-    }
-
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
-    public List<Integer> getGenreIds() {
-        return genreIds;
-    }
-
-    public void setGenreIds(List<Integer> genreIds) {
-        this.genreIds = genreIds;
-    }
-
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getOriginalTitle() {
-        return originalTitle;
+    public String getIso6391() {
+        return iso6391;
     }
 
-    public void setOriginalTitle(String originalTitle) {
-        this.originalTitle = originalTitle;
+    public void setIso6391(String iso6391) {
+        this.iso6391 = iso6391;
     }
 
-    public String getOriginalLanguage() {
-        return originalLanguage;
+    public String getIso31661() {
+        return iso31661;
     }
 
-    public void setOriginalLanguage(String originalLanguage) {
-        this.originalLanguage = originalLanguage;
+    public void setIso31661(String iso31661) {
+        this.iso31661 = iso31661;
     }
 
-    public String getTitle() {
-        return title;
+    public String getKey() {
+        return key;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setKey(String key) {
+        this.key = key;
     }
 
-    public String getBackdropPath() {
-        return backdropPath;
+    public String getName() {
+        return name;
     }
 
-    public void setBackdropPath(String backdropPath) {
-        this.backdropPath = backdropPath;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Double getPopularity() {
-        return popularity;
+    public String getSite() {
+        return site;
     }
 
-    public void setPopularity(Double popularity) {
-        this.popularity = popularity;
+    public void setSite(String site) {
+        this.site = site;
     }
 
-    public Integer getVoteCount() {
-        return voteCount;
+    public Integer getSize() {
+        return size;
     }
 
-    public void setVoteCount(Integer voteCount) {
-        this.voteCount = voteCount;
+    public void setSize(Integer size) {
+        this.size = size;
     }
 
-    public Boolean getVideo() {
-        return video;
+    public String getType() {
+        return type;
     }
 
-    public void setVideo(Boolean video) {
-        this.video = video;
-    }
-
-    public Double getVoteAverage() {
-        return voteAverage;
-    }
-
-    public void setVoteAverage(Double voteAverage) {
-        this.voteAverage = voteAverage;
+    public void setType(String type) {
+        this.type = type;
     }
 
 }

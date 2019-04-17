@@ -1,10 +1,15 @@
 package com.kukroid.smartshows.network;
 
+import android.arch.lifecycle.LiveData;
+
+import com.kukroid.smartshows._Model.Example;
 import com.kukroid.smartshows._Model.MovieData;
+import com.kukroid.smartshows._Model.Reviews;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 public interface API {
 
@@ -28,4 +33,10 @@ public interface API {
             @Query("api_key") String api_key,
             @Query("page")int page
     );
+
+    @GET
+    Call<Example> getVideos(@Url String url);
+
+    @GET
+    Call<Reviews> getReviews(@Url String url);
 }
