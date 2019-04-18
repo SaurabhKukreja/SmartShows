@@ -1,6 +1,10 @@
 package com.kukroid.smartshows.presenter;
 
-import com.kukroid.smartshows._Model.Result;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
+import android.support.annotation.Nullable;
+
+import com.kukroid.smartshows._Model.Movies;
 import com.kukroid.smartshows.contract.HomeFragmentContract;
 import com.kukroid.smartshows.network.NetworkCaller;
 
@@ -28,7 +32,7 @@ public class HomeFragmentPresenter implements HomeFragmentContract.NetworkInterf
     }
 
     @Override
-    public void onResponseSuccess(List<Result> body) {
+    public void onResponseSuccess(List<Movies> body) {
 
         view.setDataToRecyclerView(body);
         view.hideProgressBar();
@@ -39,6 +43,18 @@ public class HomeFragmentPresenter implements HomeFragmentContract.NetworkInterf
 
         view.onFailure(localizedMessage);
         view.hideProgressBar();
+    }
+
+    @Override
+    public void onSuccessDataFromDatabase(LiveData<List<Movies>> favoriteMovieList) {
+
+        view.setDataFromDatabase(favoriteMovieList);
+        view.hideProgressBar();
+    }
+
+    @Override
+    public void onFailureDataFromDatabase(String localizedMessage) {
+
     }
 
     public void loadMostPopularMovies() {
@@ -62,5 +78,9 @@ public class HomeFragmentPresenter implements HomeFragmentContract.NetworkInterf
             view.onOffline();
         }
 
+    }
+
+    public void loadFavoriteMovies() {
+        networkCaller.getFavoriteMovies();
     }
 }

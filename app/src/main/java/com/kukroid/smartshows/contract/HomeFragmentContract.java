@@ -1,7 +1,8 @@
 package com.kukroid.smartshows.contract;
 
-import com.kukroid.smartshows._Model.MovieData;
-import com.kukroid.smartshows._Model.Result;
+import android.arch.lifecycle.LiveData;
+
+import com.kukroid.smartshows._Model.Movies;
 
 import java.util.List;
 
@@ -9,15 +10,19 @@ public interface HomeFragmentContract {
 
 
     boolean checkInternetConnectivity();
-    void setDataToRecyclerView(List<Result> body);
+    void setDataToRecyclerView(List<Movies> body);
     void showProgressBar();
     void hideProgressBar();
     void onOffline();
     void onFailure(String localizedMessage);
 
+    void setDataFromDatabase(LiveData<List<Movies>> favoriteMovieList);
+
     interface NetworkInterface{
-        void onResponseSuccess(List<Result> body);
+        void onResponseSuccess(List<Movies> body);
         void onResponseFailure(String localizedMessage);
+        void onSuccessDataFromDatabase(LiveData<List<Movies>> favoriteMovieList);
+        void onFailureDataFromDatabase(String localizedMessage);
     }
 
     interface HomeModel{

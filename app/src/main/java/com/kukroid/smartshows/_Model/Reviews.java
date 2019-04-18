@@ -1,28 +1,35 @@
 
 package com.kukroid.smartshows._Model;
 
-import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class MovieData implements Serializable{
+public class Reviews {
 
+    @SerializedName("id")
+    @Expose
+    private Integer id;
     @SerializedName("page")
     @Expose
     private Integer page;
     @SerializedName("results")
     @Expose
-    private List<Movies> movies = null;
-    @SerializedName("dates")
-    @Expose
-    private Dates dates;
+    private List<ReviewData> results = null;
     @SerializedName("total_pages")
     @Expose
     private Integer totalPages;
     @SerializedName("total_results")
     @Expose
     private Integer totalResults;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getPage() {
         return page;
@@ -32,20 +39,12 @@ public class MovieData implements Serializable{
         this.page = page;
     }
 
-    public List<Movies> getMovies() {
-        return movies;
+    public List<ReviewData> getResults() {
+        return results;
     }
 
-    public void setMovies(List<Movies> movies) {
-        this.movies = movies;
-    }
-
-    public Dates getDates() {
-        return dates;
-    }
-
-    public void setDates(Dates dates) {
-        this.dates = dates;
+    public void setResults(List<ReviewData> results) {
+        this.results = results;
     }
 
     public Integer getTotalPages() {

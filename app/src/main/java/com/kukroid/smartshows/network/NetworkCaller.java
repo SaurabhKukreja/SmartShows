@@ -2,9 +2,18 @@ package com.kukroid.smartshows.network;
 
 
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
+import android.support.annotation.Nullable;
+
+import com.kukroid.smartshows.MyApplication;
 import com.kukroid.smartshows.Util.Utils;
+import com.kukroid.smartshows._Model.Movies;
 import com.kukroid.smartshows.contract.HomeFragmentContract;
 import com.kukroid.smartshows._Model.MovieData;
+import com.kukroid.smartshows.database.MoviesDatabase;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,7 +40,7 @@ public class NetworkCaller  {
         public void onResponse(Call<MovieData> call, Response<MovieData> response) {
             Utils.log("Request: "+call.request().url());
             Utils.log("Response: "+call.request().body());
-          networkInterface.onResponseSuccess(response.body().getResults());
+          networkInterface.onResponseSuccess(response.body().getMovies());
         }
 
         @Override
@@ -49,5 +58,13 @@ public class NetworkCaller  {
     public void getMostPopularMoview(int page) {
         Call<MovieData> movieList = api.getpopularMovies(Utils.api_key,page);
         movieList.enqueue(movieCallbacks);
+    }
+
+    public void getFavoriteMovies() {
+
+        LiveData<List<Movies>> favoriteMovieList = MoviesDatabase.getMoviesDatabase(MyApplication.getAppContext())
+                                                    .getMovies().getFavoritemovies();
+        networkInterface.onSuccessDataFromDatabase(favoriteMovieList);
+
     }
 }

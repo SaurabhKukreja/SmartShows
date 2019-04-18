@@ -6,14 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.kukroid.smartshows.R;
-import com.kukroid.smartshows._Model.MovieData;
-import com.kukroid.smartshows._Model.Result;
+import com.kukroid.smartshows._Model.Movies;
 import com.kukroid.smartshows.interfaces.MovieClick;
 import com.kukroid.smartshows.network.NetworkController;
 
@@ -24,11 +22,11 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
 
 
     private MovieClick movieClick;
-    private List<Result> movieDataList;
+    private List<Movies> movieDataList;
     private Context mContext;
     RequestOptions requestOptions;
 
-    public MovieListAdapter(Context mContext , MovieClick movieClick, List<Result> movieDataList) {
+    public MovieListAdapter(Context mContext , MovieClick movieClick, List<Movies> movieDataList) {
 
         this.movieClick = movieClick;
         this.movieDataList = movieDataList;
